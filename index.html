@@ -208,6 +208,47 @@
             display: block;
         }
 
+        /* Instructions Container */
+        .instructions-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .instructions-container p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .instructions-container p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instructions-container strong {
+            color: var(--text-main);
+        }
+
+        .instructions-container .highlight-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #60a5fa;
+            letter-spacing: 0.5px;
+        }
+
         /* Video Container Styles */
         .video-container {
             background: var(--card-bg);
@@ -278,6 +319,19 @@
             </svg>
             <div id="btnSpinner" class="spinner"></div>
         </button>
+    </div>
+
+    <div class="instructions-container">
+        <p><strong>आदरणीय,</strong></p>
+        <p>यदि आपके DishTV पर चैनल नहीं आ रहे हैं अथवा 102 त्रुटि (Error 102) प्रदर्शित हो रही है, तो कृपया अपने मोबाइल नंबर से नीचे दिया गया संदेश भेजें:</p>
+        <div class="highlight-box">
+            DishTV refresh VC Number<br><br>
+            <span style="color: var(--text-muted)">उदाहरण:</span><br>
+            DishTV refresh 02536565871
+        </div>
+        <p>इस संदेश को <strong>9839485042</strong> या <strong>57575</strong> पर SMS करें। आपका DishTV कनेक्शन स्वतः रिफ्रेश हो जाएगा और सेवाएं पुनः चालू हो जाएंगी।</p>
+        <p>किसी भी प्रकार की सहायता के लिए हमसे <strong>(9839485042)</strong> संपर्क करने में संकोच न करें।</p>
+        <p>धन्यवाद।</p>
     </div>
 
     <div class="video-container">
