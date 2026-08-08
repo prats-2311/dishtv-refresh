@@ -262,7 +262,7 @@
     <div class="container">
         <div class="header">
             <h1>DishTV Refresh</h1>
-            <p>Send an automated refresh request</p>
+            <p>DishTV Refresh Request</p>
         </div>
 
         <div class="input-group">
@@ -272,7 +272,7 @@
         </div>
 
         <button id="submitBtn" class="submit-btn" onclick="submitRefresh()">
-            <span id="btnText">Send SMS Request</span>
+            <span id="btnText">Submit</span>
             <svg id="btnIcon" class="icon-send" viewBox="0 0 24 24">
                 <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" />
             </svg>
@@ -384,7 +384,7 @@
                 // Restore button state
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('is-loading');
-                document.getElementById('btnText').textContent = 'Send SMS Request';
+                document.getElementById('btnText').textContent = 'Submit';
 
                 // Display success message
                 showFeedback('Opening messaging app...', 'success');
