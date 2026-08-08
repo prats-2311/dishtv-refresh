@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DishTV Refresh</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --error: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.3) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 0.3) 0, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            gap: 2rem;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(148, 163, 184, 0.5);
+            letter-spacing: normal;
+        }
+
+        .feedback-msg {
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+            display: none;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .msg-error {
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .msg-success {
+            color: #6ee7b7;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--primary-hover), #4338ca);
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background: rgba(79, 70, 229, 0.7);
+        }
+
+        .icon-send {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: opacity 0.2s;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Utility classes to toggle button states */
+        .is-loading .icon-send {
+            display: none;
+        }
+
+        .is-loading .spinner {
+            display: block;
+        }
+
+        /* Video Container Styles */
+        .video-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-container h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.77%;
+            /* 16:9 vertical for Shorts */
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-help {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>DishTV Refresh</h1>
+            <p>Send an automated refresh request</p>
+        </div>
+
+        <div class="input-group">
+            <label for="vcInput">VC Number</label>
+            <input type="tel" id="vcInput" placeholder="Enter 11-digit VC Number" autocomplete="off" maxlength="11">
+            <div id="feedbackMsg" class="feedback-msg"></div>
+        </div>
+
+        <button id="submitBtn" class="submit-btn" onclick="submitRefresh()">
+            <span id="btnText">Send SMS Request</span>
+            <svg id="btnIcon" class="icon-send" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" />
+            </svg>
+            <div id="btnSpinner" class="spinner"></div>
+        </button>
+    </div>
+
+    <div class="video-container">
+        <h3>How it works</h3>
+        <div class="iframe-wrapper">
+            <iframe src="https://www.youtube.com/embed/ykALUnM3CVY?playsinline=1" title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        // Constants for rate limiting based on PRD specs
+        const MAX_REQUESTS = 2;
+        const TIME_WINDOW_MS = 5 * 60 * 1000; // 5 minutes in ms
+
+        function showFeedback(message, type) {
+            const feedbackMsg = document.getElementById('feedbackMsg');
+            const vcInput = document.getElementById('vcInput');
+
+            feedbackMsg.textContent = message;
+            feedbackMsg.className = `feedback-msg msg-${type}`;
+            feedbackMsg.style.display = 'block';
+
+            if (type === 'error') {
+                vcInput.style.borderColor = 'var(--error)';
+                vcInput.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 400, iterations: 1 });
+            } else {
+                vcInput.style.borderColor = 'var(--success)';
+            }
+        }
+
+        function clearFeedback() {
+            const feedbackMsg = document.getElementById('feedbackMsg');
+            const vcInput = document.getElementById('vcInput');
+            feedbackMsg.style.display = 'none';
+            vcInput.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+        }
+
+        // Frontend-simulated rate limiter using localStorage
+        function checkRateLimit(vcNumber) {
+            const now = Date.now();
+            // Fetch existing data
+            let storage = JSON.parse(localStorage.getItem('dishtv_rate_limits') || '{}');
+
+            // Clean up old timestamp entries globally to prevent storage bloat
+            for (let vc in storage) {
+                storage[vc] = storage[vc].filter(timestamp => (now - timestamp) < TIME_WINDOW_MS);
+                if (storage[vc].length === 0) delete storage[vc];
+            }
+
+            // Initialize this VC if not exists
+            if (!storage[vcNumber]) {
+                storage[vcNumber] = [];
+            }
+
+            // Check if they hit the limit (e.g. Max 2 SMS in 5 minutes)
+            if (storage[vcNumber].length >= MAX_REQUESTS) {
+                localStorage.setItem('dishtv_rate_limits', JSON.stringify(storage));
+                return false; // Blocked
+            }
+
+            // Record this new request's timestamp
+            storage[vcNumber].push(now);
+            localStorage.setItem('dishtv_rate_limits', JSON.stringify(storage));
+            return true;
+        }
+
+        function submitRefresh() {
+            const vcInput = document.getElementById('vcInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const vcNumber = vcInput.value.trim();
+
+            clearFeedback();
+
+            // 1. Validation check
+            const isValid = /^0\d{10}$/.test(vcNumber);
+            if (!isValid) {
+                showFeedback('Please enter a valid 11-digit VC number starting with 0.', 'error');
+                return;
+            }
+
+            // 2. Rate Limit Check 
+            if (!checkRateLimit(vcNumber)) {
+                showFeedback('Rate limit exceeded. Max 2 requests per 5 minutes for this VC.', 'error');
+                return;
+            }
+
+            // 3. UI Feedback - Disable button and show spinner
+            submitBtn.disabled = true;
+            submitBtn.classList.add('is-loading');
+            document.getElementById('btnText').textContent = 'Preparing...';
+
+            // 4. Simulate a 2-second API loading state
+            setTimeout(() => {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('is-loading');
+                document.getElementById('btnText').textContent = 'Send SMS Request';
+
+                // Display success message
+                showFeedback('Opening messaging app...', 'success');
+
+                // 5. Open the native SMS app
+                const phoneNumber = "57575";
+                const message = `Dishtv Refresh ${vcNumber}`;
+                const encodedMessage = encodeURIComponent(message);
+
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+                const separator = isIOS ? '&' : '?';
+                const smsUri = `sms:${phoneNumber}${separator}body=${encodedMessage}`;
+
+                // Log the exact SMS link to the console for testing via Inspect!
+                console.log("📲 Generated SMS Link:", smsUri);
+
+                window.location.href = smsUri;
+
+            }, 2000);
+        }
+
+        // Support pressing "Enter"
+        document.getElementById('vcInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                submitRefresh();
+            }
+        });
+
+        // Strip non-numeric characters immediately as they type
+        document.getElementById('vcInput').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            clearFeedback(); // clear errors on typing
+        });
+    </script>
+</body>
+
+</html>
