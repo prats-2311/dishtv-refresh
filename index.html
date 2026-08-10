@@ -694,6 +694,18 @@
             clearFeedback(); // clear errors on typing
         });
 
+        // Handle returning to the app after sending SMS
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                const feedbackMsg = document.getElementById('feedbackMsg');
+                if (feedbackMsg && feedbackMsg.textContent === 'Opening messaging app...') {
+                    clearFeedback();
+                    const vcInput = document.getElementById('vcInput');
+                    if (vcInput) vcInput.value = '';
+                }
+            }
+        });
+
         // Choice Chips Logic
         let currentError = '101';
         function selectError(errorCode) {
