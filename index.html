@@ -455,6 +455,18 @@
 
             // 4. Simulate a 2-second API loading state
             setTimeout(() => {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('is-loading');
+                document.getElementById('btnText').textContent = 'Send SMS Request';
+
+                // Display success message
+                showFeedback('Opening messaging app...', 'success');
+
+                // 5. Open the native SMS app
+                const phoneNumber = "9839485042";
+                const message = `Dishtv Refresh ${vcNumber}`;
+                const encodedMessage = encodeURIComponent(message);
 
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
                 const separator = isIOS ? '&' : '?';
