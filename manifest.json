@@ -1,0 +1,15 @@
+{
+  "name": "DishTV Refresh",
+  "short_name": "DishTV",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f2f2f2",
+  "theme_color": "#43a047",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
