@@ -8,12 +8,12 @@
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --bg-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.9);
             --primary: #3b82f6;
             --primary-hover: #2563eb;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
             --error: #ef4444;
             --success: #10b981;
         }
@@ -28,9 +28,9 @@
         body {
             background-color: var(--bg-color);
             background-image:
-                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.3) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 0.3) 0, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(253, 16%, 95%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 95%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 95%, 1) 0, transparent 50%);
             background-attachment: fixed;
             color: var(--text-main);
             display: flex;
@@ -63,19 +63,19 @@
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 24px;
             padding: 2.5rem;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             transform: translateY(0);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.2);
         }
 
         .header {
@@ -113,8 +113,8 @@
         .input-group input {
             width: 100%;
             padding: 1rem 1.25rem;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
             border-radius: 12px;
             color: var(--text-main);
             font-size: 1.05rem;
@@ -126,11 +126,11 @@
         .input-group input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-            background: rgba(15, 23, 42, 0.8);
+            background: #ffffff;
         }
 
         .input-group input::placeholder {
-            color: rgba(148, 163, 184, 0.5);
+            color: rgba(71, 85, 105, 0.5);
             letter-spacing: normal;
         }
 
@@ -240,8 +240,8 @@
         }
 
         .chip {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
             color: var(--text-muted);
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -253,7 +253,7 @@
         }
 
         .chip:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f1f5f9;
         }
 
         .chip.active {
@@ -265,8 +265,8 @@
         /* Dynamic Solution Container */
         .solution-container {
             display: none;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
             border-radius: 12px;
             padding: 1.25rem;
             text-align: center;
@@ -314,7 +314,7 @@
 
         .accordion-item {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.15);
             border-radius: 12px;
             margin-bottom: 0.75rem;
             overflow: hidden;
@@ -339,7 +339,7 @@
         }
 
         .accordion-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .accordion-icon {
