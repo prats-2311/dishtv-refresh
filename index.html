@@ -8,11 +8,11 @@
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <style>
         :root {
-            --bg-color: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --bg-color: #f2f2f2;
+            --card-bg: #ffffff;
             --primary: #3b82f6;
             --primary-hover: #2563eb;
-            --text-main: #0f172a;
+            --text-main: #000000;
             --text-muted: #475569;
             --error: #ef4444;
             --success: #10b981;
@@ -27,11 +27,7 @@
 
         body {
             background-color: var(--bg-color);
-            background-image:
-                radial-gradient(at 0% 0%, hsla(253, 16%, 95%, 1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, hsla(225, 39%, 95%, 1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(339, 49%, 95%, 1) 0, transparent 50%);
-            background-attachment: fixed;
+            background-image: none;
             color: var(--text-main);
             display: flex;
             flex-direction: column;
@@ -44,7 +40,7 @@
 
         .top-nav {
             width: 100%;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -52,6 +48,8 @@
             top: 0;
             left: 0;
             z-index: 10;
+            background: #202124;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .brand-logo {
@@ -61,14 +59,12 @@
 
         .container {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
             padding: 2.5rem;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transform: translateY(0);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -84,11 +80,9 @@
         }
 
         .header h1 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
             margin-bottom: 0.5rem;
         }
 
@@ -159,11 +153,11 @@
         .submit-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            background: #43a047;
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -175,9 +169,9 @@
         }
 
         .submit-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, var(--primary-hover), #4338ca);
+            background: #388e3c;
             transform: scale(1.02);
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(67, 160, 71, 0.3);
         }
 
         .submit-btn:active:not(:disabled) {
@@ -187,7 +181,7 @@
         .submit-btn:disabled {
             opacity: 0.7;
             cursor: not-allowed;
-            background: rgba(79, 70, 229, 0.7);
+            background: rgba(67, 160, 71, 0.7);
         }
 
         .icon-send {
@@ -224,146 +218,6 @@
 
         .is-loading .spinner {
             display: block;
-        }
-
-        /* Choice Chips */
-        .choice-chips {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-        }
-        
-        .choice-chips::-webkit-scrollbar {
-            display: none;
-        }
-
-        .chip {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-
-        .chip:hover {
-            background: #f1f5f9;
-        }
-
-        .chip.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Dynamic Solution Container */
-        .solution-container {
-            display: none;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            padding: 1.25rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .solution-text {
-            font-size: 0.95rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Action Buttons Container */
-        .action-buttons {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        /* Submit Btn adjustments */
-        .submit-btn {
-            flex: 1;
-        }
-
-        /* FAQ Accordion */
-        .faq-section {
-            width: 100%;
-            max-width: 420px;
-            margin-top: 1rem;
-        }
-        
-        .faq-header {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            text-align: center;
-        }
-
-        .accordion-item {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            overflow: hidden;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-
-        .accordion-btn {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-
-        .accordion-btn:hover {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        .accordion-item.active .accordion-icon {
-            transform: rotate(45deg);
-            color: var(--error);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .accordion-inner {
-            padding: 0 1.25rem 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
         }
 
         /* Instructions Container */
@@ -466,37 +320,19 @@
             <h1>DishTV Refresh Request</h1>
         </div>
 
-        <!-- Choice Chips -->
-        <div class="choice-chips">
-            <div class="chip active" onclick="selectError('101')">Error 101/102</div>
-            <div class="chip" onclick="selectError('103')">Error 103/104</div>
-            <div class="chip" onclick="selectError('301')">Error 301</div>
+        <div class="input-group">
+            <label for="vcInput">VC Number</label>
+            <input type="tel" id="vcInput" placeholder="Enter 11-digit VC Number" autocomplete="off" maxlength="11">
+            <div id="feedbackMsg" class="feedback-msg"></div>
         </div>
 
-        <!-- Dynamic Solution Container -->
-        <div id="solutionContainer" class="solution-container">
-            <p id="solutionText" class="solution-text"></p>
-            <button id="solutionActionBtn" class="submit-btn" style="display:none;" onclick="handleSolutionAction()">Action</button>
-        </div>
-
-        <!-- Standard SMS Form -->
-        <div id="smsFormContainer">
-            <div class="input-group">
-                <label for="vcInput">VC Number</label>
-                <input type="tel" id="vcInput" placeholder="Enter 11-digit VC Number" autocomplete="off" maxlength="11">
-                <div id="feedbackMsg" class="feedback-msg"></div>
-            </div>
-
-            <div class="action-buttons">
-                <button id="submitBtn" class="submit-btn" onclick="submitRefresh()">
-                    <span id="btnText">Submit SMS Request</span>
-                    <svg id="btnIcon" class="icon-send" viewBox="0 0 24 24">
-                        <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" />
-                    </svg>
-                    <div id="btnSpinner" class="spinner"></div>
-                </button>
-            </div>
-        </div>
+        <button id="submitBtn" class="submit-btn" onclick="submitRefresh()">
+            <span id="btnText">Send SMS Request</span>
+            <svg id="btnIcon" class="icon-send" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2" />
+            </svg>
+            <div id="btnSpinner" class="spinner"></div>
+        </button>
     </div>
 
     <!-- <div class="instructions-container">
@@ -524,46 +360,7 @@
         </div>
     </div>
 
-    <!-- FAQ Section -->
-    <div class="faq-section">
-        <h3 class="faq-header">Common DishTV Errors</h3>
-        
-        <div class="accordion-item">
-            <button class="accordion-btn">
-                What does Error 101 or 102 mean?
-                <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-                <div class="accordion-inner">
-                    This error usually appears when your set-top box hasn't received the authorization signal in a while (e.g. if the TV was turned off for several days). Sending a refresh SMS instantly reactivates it.
-                </div>
-            </div>
-        </div>
 
-        <div class="accordion-item">
-            <button class="accordion-btn">
-                What does Error 103 or 104 mean?
-                <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-                <div class="accordion-inner">
-                    This means your set-top box cannot read the Smart Card. Often, simply removing the card, wiping the golden chip gently with a soft cloth, and re-inserting it firmly solves the issue.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <button class="accordion-btn">
-                What does Error 301 mean?
-                <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-                <div class="accordion-inner">
-                    Error 301 indicates a low or negative account balance. To resolve this, you need to recharge your DishTV account instead of sending a refresh signal.
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Constants for rate limiting based on PRD specs
@@ -656,18 +453,6 @@
 
             // 4. Simulate a 2-second API loading state
             setTimeout(() => {
-                // Restore button state
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('is-loading');
-                document.getElementById('btnText').textContent = 'Submit';
-
-                // Display success message
-                showFeedback('Opening messaging app...', 'success');
-
-                // 5. Open the native SMS app
-                const phoneNumber = "9839485042";
-                const message = `Dishtv Refresh ${vcNumber}`;
-                const encodedMessage = encodeURIComponent(message);
 
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
                 const separator = isIOS ? '&' : '?';
@@ -706,67 +491,7 @@
             }
         });
 
-        // Choice Chips Logic
-        let currentError = '101';
-        function selectError(errorCode) {
-            currentError = errorCode;
-            
-            // Update UI Chips
-            document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const smsForm = document.getElementById('smsFormContainer');
-            const solutionContainer = document.getElementById('solutionContainer');
-            const solutionText = document.getElementById('solutionText');
-            const actionBtn = document.getElementById('solutionActionBtn');
-            
-            clearFeedback();
-            
-            if (errorCode === '101') {
-                smsForm.style.display = 'block';
-                solutionContainer.style.display = 'none';
-            } else if (errorCode === '103') {
-                smsForm.style.display = 'none';
-                solutionContainer.style.display = 'block';
-                solutionText.innerHTML = '<strong>Smart Card Issue:</strong> Please remove your Smart Card, wipe it gently, and re-insert it firmly. Ensure the gold chip is facing downwards.';
-                actionBtn.style.display = 'none';
-            } else if (errorCode === '301') {
-                smsForm.style.display = 'none';
-                solutionContainer.style.display = 'block';
-                solutionText.innerHTML = '<strong>Low Balance:</strong> Your account balance is low or negative. Please recharge your account to resume services.';
-                actionBtn.style.display = 'block';
-                actionBtn.textContent = 'Recharge Now';
-            }
-        }
-        
-        function handleSolutionAction() {
-            if (currentError === '301') {
-                window.open('https://www.dishtv.in/dth-recharge.html', '_blank');
-            }
-        }
 
-        // Accordion Logic
-        document.querySelectorAll('.accordion-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const item = button.parentElement;
-                const content = button.nextElementSibling;
-                
-                // Toggle active class
-                const isActive = item.classList.contains('active');
-                
-                // Close all other accordions (optional, but good UX)
-                document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
-                });
-                
-                // If it wasn't active, open it
-                if (!isActive) {
-                    item.classList.add('active');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        });
     </script>
 </body>
 
